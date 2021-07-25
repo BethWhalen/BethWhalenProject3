@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import firebase from './firebase';
 import './App.css';
-import { BLOCK_SCOPED_SYMBOL } from '@babel/types';
 
 
 function App() {
 
   const [goals, setGoals] = useState([]);
+  const [userInput, setUserInput] = useState('');
 
   useEffect( () => {
     // dbRef = reference to the firebase database
@@ -22,12 +22,12 @@ function App() {
 
       // using for in loop to itirate through the object and get each goal
       for (let propertyName in myData) {
-        // const goalObject = {
-        //   key: propertyName,
-        //   title: myData[propertyName]
-        // }
+        const goalObject = {
+          key: propertyName,
+          title: myData[propertyName]
+        }
         // push the goal into the newArray
-        newArray.push(myData[propertyName]);
+        newArray.push(goalObject);
       }
       // call setGoals in order to update State using the newArray
       setGoals(newArray);
@@ -36,17 +36,43 @@ function App() {
 
   }, [] );
 
+  const handleChange = (event) => {
+    setUserInput(event.target.value);
+  }
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const dbRef = firebase.database().ref();
+    dbRef.push(userInput);
+    setUserInput('');
+  }
+
+  const handleRemoveGoal = (goalToRemove) => {
+    const dbRef = firebase.database().ref();
+    dbRef.child(goalToRemove).remove();
+  }
 
   return (
     <div className="App">
       <h1>Project 3</h1>
 
+      <form action="submit" onSubmit={handleSubmit}>
+        <label htmlFor="userGoal">Add a goal to the list:</label>
+        <input 
+          type="text" 
+          id="userGoal" 
+          onChange={handleChange} 
+          value={userInput}
+        />
+        <button onSubmit={handleSubmit}>Set the Goal!</button>
+      </form>
+
       <ul>
-        {goals.map( (goal) => {
+        {goals.map( (goalObject) => {
           return(
-            <li>
-              <p>{goal}</p>
+            <li key={goalObject.key}>
+              <p>{goalObject.title}</p> 
+              <button onClick={ () => handleRemoveGoal(goalObject.key)}>Remove Goal!</button>
             </li>
           )
         })}
@@ -69,4 +95,15 @@ export default App;
     // store the data from firebase in a new State variable
 
 // 2. Allow a user to add goals
-    //
+    // create a form on the page with text input and submit button
+    // capture the users input and store it in State (attach a handleChange function to the form input)
+    // upon submit, push the users input data, from State, into Firebase (use handleSubmit)
+      // - prevent the default form submission
+      // - create reference to the firebase database
+      // - grab the value from State and push to firebase
+      // - reset the state to be empty
+// add the unique key data (add object, with the key & title(goal) data, to useEffect's for in loop)
+// 3. Allow a user to remove a goal they complete
+    // add remove button next to each goal
+    // create remove goal function that will use each unique key to tell firebase which goal to remove
+    // add click event to each button that will call the remove goal function

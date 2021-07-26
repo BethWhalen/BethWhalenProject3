@@ -1,9 +1,7 @@
 .App {
   text-align: center;
   max-width: 1080px;
-  /* margin: 0 auto; */
   background-color: lavenderblush;
-  font-size: 62.5%;
 }
 
 h1 {
@@ -13,19 +11,19 @@ h1 {
 ul {
   display: flex;
   flex-direction: column;
+  
   align-items: center;
 }
 
 li {
   display: flex;
+  align-items: center;
   list-style-type: none;
 }
 
-p {
-  font-size: 1.6em;
-}
 
 button {
   background-color: lavender;
-  
+  border: 1px solid black;
+  margin: 5px;
 }

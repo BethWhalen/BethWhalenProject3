@@ -8,6 +8,9 @@ function App() {
   const [goals, setGoals] = useState([]);
   const [userInput, setUserInput] = useState('');
 
+  
+
+  // START useEFFECT
   useEffect( () => {
     // dbRef = reference to the firebase database
     const dbRef = firebase.database().ref();
@@ -32,9 +35,8 @@ function App() {
       // call setGoals in order to update State using the newArray
       setGoals(newArray);
     })
-
-
   }, [] );
+  // END useEFFECT
 
   const handleChange = (event) => {
     setUserInput(event.target.value);
@@ -71,8 +73,8 @@ function App() {
         {goals.map( (goalObject) => {
           return(
             <li key={goalObject.key}>
-              <p>{goalObject.title}</p> 
               <button onClick={ () => handleRemoveGoal(goalObject.key)}>Remove Goal!</button>
+              <p>{goalObject.title}</p> 
             </li>
           )
         })}
@@ -103,7 +105,20 @@ export default App;
       // - grab the value from State and push to firebase
       // - reset the state to be empty
 // add the unique key data (add object, with the key & title(goal) data, to useEffect's for in loop)
+
 // 3. Allow a user to remove a goal they complete
     // add remove button next to each goal
     // create remove goal function that will use each unique key to tell firebase which goal to remove
     // add click event to each button that will call the remove goal function
+
+// STRETCH GOALS: 
+// 4. make an API call to https://zenquotes.io/api/random (or maybe other...) to get an inspirational quote
+      // OR.....???
+// use an api to get an image to be set with each new goal that is set
+
+// when user sets a new goal, display a quote/data from the api call to the page
+
+    // api call 
+    //
+
+

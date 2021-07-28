@@ -68,3 +68,32 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
+My Notes: 
+ useEffect( () => {
+    // dbRef = reference to the firebase database
+    const dbRef = firebase.database().ref();
+    // add event listener to dbRef that will listen for every time there is a change in the database, and then "fire" the callback function that will get the data (response)
+    dbRef.on('value', (response) => {
+      // console.log(response.val());
+
+      // variable called data to store the response from Firebase; .val() method gets the data object
+      const myData = response.val();
+      // new State variable that will store the response as a State
+      const newArray = [];
+
+      // using for in loop to itirate through the object and get each goal
+      for (let propertyName in myData) {
+        const goalObject = {
+          key: propertyName,
+          title: myData[propertyName]
+        }
+        // push the goal into the newArray
+        newArray.push(goalObject);
+      }
+      // call setGoals in order to update State using the newArray
+      setGoals(newArray);
+    })
+  }, [] );

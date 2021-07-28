@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react';
 import firebase from './firebase';
 import './App.css';
+import DisplayPhoto from './DisplayPhoto';
 
 
 function App() {
 
   const [goals, setGoals] = useState([]);
   const [userInput, setUserInput] = useState('');
-
+  
+  // START useEFFECT
   useEffect( () => {
     // dbRef = reference to the firebase database
     const dbRef = firebase.database().ref();
@@ -33,8 +35,8 @@ function App() {
       setGoals(newArray);
     })
 
-
   }, [] );
+  // END useEFFECT
 
   const handleChange = (event) => {
     setUserInput(event.target.value);
@@ -54,30 +56,47 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Project 3</h1>
+      <header>
+        <h1>Project 3</h1>
+  
 
-      <form action="submit" onSubmit={handleSubmit}>
-        <label htmlFor="userGoal">Add a goal to the list:</label>
-        <input 
-          type="text" 
-          id="userGoal" 
-          onChange={handleChange} 
-          value={userInput}
-        />
-        <button onSubmit={handleSubmit}>Set the Goal!</button>
-      </form>
+      </header>
+      <main className="wrapper">
+        <section className="photoSection">
+          <DisplayPhoto />
+          {/* somehow need to add the child key here?? */}
+        </section>
 
-      <ul>
-        {goals.map( (goalObject) => {
-          return(
-            <li key={goalObject.key}>
-              <p>{goalObject.title}</p> 
-              <button onClick={ () => handleRemoveGoal(goalObject.key)}>Remove Goal!</button>
-            </li>
-          )
-        })}
-      </ul>
+        <section className="goalsSection">
+          
+          <form action="submit" onSubmit={handleSubmit}>
+            <label htmlFor="userGoal">Add a goal to the list:</label>
+            <input 
+              type="text" 
+              id="userGoal" 
+              required="required"
+              aria-required="true"
+              onChange={handleChange} 
+              value={userInput}
+            />
+            <button onSubmit={handleSubmit}>Set the Goal!</button>
+          </form>
 
+          <ul>
+            {goals.map( (goalObject) => {
+              return(
+                <li key={goalObject.key}>
+                  <p className="goalbox">{goalObject.title}</p> 
+                  <button className="removeButton" onClick={ () => handleRemoveGoal(goalObject.key)}>Goal Complete!</button>
+                </li>
+              )
+            })}
+          </ul>
+
+        </section>
+
+      </main>
+      <footer>Created at Juno College</footer>
     </div>
   );
 }
@@ -103,7 +122,14 @@ export default App;
       // - grab the value from State and push to firebase
       // - reset the state to be empty
 // add the unique key data (add object, with the key & title(goal) data, to useEffect's for in loop)
+
 // 3. Allow a user to remove a goal they complete
     // add remove button next to each goal
     // create remove goal function that will use each unique key to tell firebase which goal to remove
     // add click event to each button that will call the remove goal function
+
+// STRETCH GOALS: 
+// 4. make an API call to unsplash photos and pull a motivational background image
+// set the image as a background-image
+
+

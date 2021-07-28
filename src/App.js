@@ -1,15 +1,14 @@
 import { useState, useEffect } from 'react';
 import firebase from './firebase';
 import './App.css';
+import DisplayPhoto from './DisplayPhoto';
 
 
 function App() {
 
   const [goals, setGoals] = useState([]);
   const [userInput, setUserInput] = useState('');
-
   
-
   // START useEFFECT
   useEffect( () => {
     // dbRef = reference to the firebase database
@@ -35,6 +34,7 @@ function App() {
       // call setGoals in order to update State using the newArray
       setGoals(newArray);
     })
+
   }, [] );
   // END useEFFECT
 
@@ -56,30 +56,44 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Project 3</h1>
+      <header>
+        <h1>Project 3</h1>
+  
+        <form action="submit" onSubmit={handleSubmit}>
+          <label htmlFor="userGoal">Add a goal to the list:</label>
+          <input 
+            type="text" 
+            id="userGoal" 
+            onChange={handleChange} 
+            value={userInput}
+          />
+          <button onSubmit={handleSubmit}>Set the Goal!</button>
+        </form>
 
-      <form action="submit" onSubmit={handleSubmit}>
-        <label htmlFor="userGoal">Add a goal to the list:</label>
-        <input 
-          type="text" 
-          id="userGoal" 
-          onChange={handleChange} 
-          value={userInput}
-        />
-        <button onSubmit={handleSubmit}>Set the Goal!</button>
-      </form>
+      </header>
+      <main>
+        <section className="goalsSection">
 
-      <ul>
-        {goals.map( (goalObject) => {
-          return(
-            <li key={goalObject.key}>
-              <button onClick={ () => handleRemoveGoal(goalObject.key)}>Remove Goal!</button>
-              <p>{goalObject.title}</p> 
-            </li>
-          )
-        })}
-      </ul>
+          <ul>
+            {goals.map( (goalObject) => {
+              return(
+                <li key={goalObject.key}>
+                  <button onClick={ () => handleRemoveGoal(goalObject.key)}>Remove Goal!</button>
+                  <p>{goalObject.title}</p> 
+                </li>
+              )
+            })}
+          </ul>
 
+        </section>
+
+        <section className="photoSection">
+          <DisplayPhoto />
+          {/* somehow need to add the child key here?? */}
+        </section>
+
+      </main>
+      <footer>Created at Juno College</footer>
     </div>
   );
 }
@@ -112,13 +126,7 @@ export default App;
     // add click event to each button that will call the remove goal function
 
 // STRETCH GOALS: 
-// 4. make an API call to https://zenquotes.io/api/random (or maybe other...) to get an inspirational quote
-      // OR.....???
-// use an api to get an image to be set with each new goal that is set
-
-// when user sets a new goal, display a quote/data from the api call to the page
-
-    // api call 
-    //
+// 4. make an API call to unsplash photos and pull a motivational background image
+// set the image as a background-image
 
 

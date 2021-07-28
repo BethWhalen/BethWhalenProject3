@@ -6,17 +6,18 @@ const DisplayPhoto = (props) => {
     
     useEffect( () => {
         axios({
-            url: 'https://api.unsplash.com/search/photos',
+            // url: 'https://api.unsplash.com/search/photos',
+            url: 'https://api.unsplash.com/photos/random',
             method: 'GET',
             dataResponse: 'json',
             params: {
                 client_id: '1oYxKXc_Dr-m2Yg7dxkxadbyfHa61xqHovujsv92Xv0',
                 query: 'motivation',
-                per_page: 1
+                count: 1
             }
         }).then((response) => {
-            console.log(response.data.results);
-            setAllPhotos(response.data.results);
+            console.log(response.data);
+            setAllPhotos(response.data);
         })
 
     }, []);
@@ -26,8 +27,8 @@ const DisplayPhoto = (props) => {
                 {
                     allPhotos.map( (photoObj) => {
                         return(
-                            <div className="photo-container">
-                                <img src={photoObj.urls.small} key={photoObj.id} alt={photoObj.alt_description}/>
+                            <div className="photo-container" key={photoObj.id}>
+                                <img src={photoObj.urls.small}  alt={photoObj.alt_description}/>
                             </div>
                         )
                     })

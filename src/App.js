@@ -59,37 +59,40 @@ function App() {
       <header>
         <h1>Project 3</h1>
   
-        <form action="submit" onSubmit={handleSubmit}>
-          <label htmlFor="userGoal">Add a goal to the list:</label>
-          <input 
-            type="text" 
-            id="userGoal" 
-            onChange={handleChange} 
-            value={userInput}
-          />
-          <button onSubmit={handleSubmit}>Set the Goal!</button>
-        </form>
 
       </header>
-      <main>
+      <main className="wrapper">
+        <section className="photoSection">
+          <DisplayPhoto />
+          {/* somehow need to add the child key here?? */}
+        </section>
+
         <section className="goalsSection">
+          
+          <form action="submit" onSubmit={handleSubmit}>
+            <label htmlFor="userGoal">Add a goal to the list:</label>
+            <input 
+              type="text" 
+              id="userGoal" 
+              required="required"
+              aria-required="true"
+              onChange={handleChange} 
+              value={userInput}
+            />
+            <button onSubmit={handleSubmit}>Set the Goal!</button>
+          </form>
 
           <ul>
             {goals.map( (goalObject) => {
               return(
                 <li key={goalObject.key}>
-                  <button onClick={ () => handleRemoveGoal(goalObject.key)}>Remove Goal!</button>
-                  <p>{goalObject.title}</p> 
+                  <p className="goalbox">{goalObject.title}</p> 
+                  <button className="removeButton" onClick={ () => handleRemoveGoal(goalObject.key)}>Goal Complete!</button>
                 </li>
               )
             })}
           </ul>
 
-        </section>
-
-        <section className="photoSection">
-          <DisplayPhoto />
-          {/* somehow need to add the child key here?? */}
         </section>
 
       </main>

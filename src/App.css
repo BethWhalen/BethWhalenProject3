@@ -1,61 +1,164 @@
 .App {
   text-align: center;
-  /* height: 99vh; */
-  background-color: lavenderblush;
-  font-size: 16px;
+  background-image: url(./yucar-fotografik-Os18w3ys5jo-unsplash.jpg);
+  background-size: cover;
+  font-size: 24px;
+  color: rgb(4, 42, 43);
 }
 
 .wrapper {
-  max-width: 1080px;
+  max-width: 1140px;
   width: 90%;
 }
 
+/* HEADER STYLING START */
+
 h1 {
-  font-size: 2em;
+  font-size: 2.5em;
+  text-transform: uppercase;
+  margin: 0 auto;
+  padding: 25px 0;
+  width: 85%;
+  max-width: 900px;
 }
 
+/* MAIN STYLYING START */
 main {
-  display: flex;
-  align-items: center;
-  /* border: 3px solid gold; */
   margin: 0 auto;
 }
-/* main has two children: section elements with classes: photoSection and goalsSection */
-section {
+
+/* general button styling: */
+button {
+  background-color: rgb(122, 130, 171, 0.8);
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid rgb(4, 42, 43);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+.formSection {
+  max-width: 900px; 
+  margin: 0 auto;
+}
+
+.formSection button, 
+input, 
+select, 
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+}
+
+label {
+  font-size: 1.8em;
+  font-weight: bold;
+}
+
+input {
+  width: 40%;
+  padding: 5px 0;
+}
+
+.mainContainer {
+  display: flex;
+  align-items: center;
+  min-height: 700px;
+}
+/* mainContainer has two children: div elements with classes: photoDiv and goalsDiv */
+.photoDiv,
+.goalsDiv {
   width: calc(100% / 2);
 }
 
+img {
+  max-width: 100%;
+  border: 2px solid white;
+}
+
+/* contents of goalsDiv include: */
 ul {
-  /* width: 100%; */
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
-  align-items: center;
-  /* border: 1px solid green; */
+  padding: 0;
+  width: 100%;
 }
 
 li {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   list-style-type: none;
-  /* width: 100%; */
-  /* border: 1px solid red; */
-
+  width: 100%;
 }
+
 .goalbox {
-  /* border: 1px solid black; */
-  /* width: 100%; */
-  /* height: 10%; */
-}
-
-button {
-  background-color: lavender;
-  border: 1px solid black;
-  margin: 5px;
+  width: 100%;
+  margin-left: 10px;
+  flex-grow: 2;
+  border: 1px solid rgb(4, 42, 43);
+  background-color: rgb(240, 223, 198, 0.7);
+  padding: 15px;
+  border-radius: 3px;
 }
 
 .removeButton {
-  padding: 10px;
+  font-size: 1rem;
 }
+
 footer {
-  background-color: lightgrey;
+  background-color: rgb(240, 223, 198);
+}
+
+
+
+@media (max-width:750px) {
+  h1 {
+    font-size: 1.8em;
+  }
+
+  label {
+    font-size: 1.4em;
+  }
+
+  li {
+    flex-direction: column;
+    margin: 0 15px;
+  }
+
+  .goalbox {
+    padding: 5px;
+  }
+}
+
+@media (max-width:575px) {
+  .formSection button, 
+  input, 
+  select, 
+  textarea {
+    font-size: 1rem;
+  }
+
+  label {
+    font-size: 1em;;
+  }
+  
+  .mainContainer {
+    flex-direction: column-reverse;
+  }
+  
+  .goalsDiv,
+  .photoDiv {
+    width: 90%;
+  }
+
+  .goalbox {
+    margin: 10px auto;
+    width: 80%;
+  }
 }

@@ -12,7 +12,7 @@ const DisplayPhoto = (props) => {
             dataResponse: 'json',
             params: {
                 client_id: '1oYxKXc_Dr-m2Yg7dxkxadbyfHa61xqHovujsv92Xv0',
-                query: 'motivation',
+                query: 'motivational',
                 count: 1
             }
         }).then((response) => {
@@ -27,7 +27,7 @@ const DisplayPhoto = (props) => {
                 {
                     allPhotos.map( (photoObj) => {
                         return(
-                            <div className="photo-container" key={photoObj.id}>
+                            <div className="photoImgContainer" key={photoObj.id}>
                                 <img src={photoObj.urls.small}  alt={photoObj.alt_description}/>
                             </div>
                         )

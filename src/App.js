@@ -4,6 +4,7 @@ import './App.css';
 import DisplayPhoto from './DisplayPhoto';
 
 
+
 function App() {
 
   const [goals, setGoals] = useState([]);
@@ -55,48 +56,57 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="App" 
+    // style={{ backgroundImage: "url(/kyle-bushnell-TyGB-4Qwnw4-unsplash.jpg)"}}
+    >
       <header>
-        <h1>Project 3</h1>
-  
+        <h1>get your sh!t together, set some goals!</h1>
+      </header> 
 
-      </header>
       <main className="wrapper">
-        <section className="photoSection">
-          <DisplayPhoto />
-          {/* somehow need to add the child key here?? */}
-        </section>
-
-        <section className="goalsSection">
-          
+        <section className="formSection">
           <form action="submit" onSubmit={handleSubmit}>
-            <label htmlFor="userGoal">Add a goal to the list:</label>
+            <label htmlFor="userGoal">What do you want to accomplish?</label>
             <input 
               type="text" 
               id="userGoal" 
+              placeholder="I am going to..."
               required="required"
               aria-required="true"
               onChange={handleChange} 
               value={userInput}
             />
-            <button onSubmit={handleSubmit}>Set the Goal!</button>
-          </form>
-
-          <ul>
-            {goals.map( (goalObject) => {
-              return(
-                <li key={goalObject.key}>
-                  <p className="goalbox">{goalObject.title}</p> 
-                  <button className="removeButton" onClick={ () => handleRemoveGoal(goalObject.key)}>Goal Complete!</button>
-                </li>
-              )
-            })}
-          </ul>
-
+            <button onSubmit={handleSubmit}>Add my goal to the list!</button>
+          </form>        
         </section>
+        {/* END OF FORM SECTION */}
+
+        {/* START OF MAIN CONTENT CONTAINER */}
+        <section className="mainContainer">
+          <div className="photoDiv">
+            <DisplayPhoto />
+          </div>  
+
+          <div className="goalsDiv">
+            <ul>
+              {goals.map( (goalObject) => {
+                return(
+                  <li key={goalObject.key}>
+                    <p className="goalbox">{goalObject.title}</p> 
+                    <button className="removeButton" onClick={ () => handleRemoveGoal(goalObject.key)}>Done! Click to Remove</button>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>         
+        </section>
+        {/* END MAIN CONTENT CONTAINER */}
 
       </main>
-      <footer>Created at Juno College</footer>
+      
+      <footer>
+        <p>Created at Juno College</p>
+      </footer>
     </div>
   );
 }

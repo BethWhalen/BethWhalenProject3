@@ -12,30 +12,21 @@ function App() {
   
   // START useEFFECT
   useEffect( () => {
-    // dbRef = reference to the firebase database
     const dbRef = firebase.database().ref();
-    // add event listener to dbRef that will listen for every time there is a change in the database, and then "fire" the callback function that will get the data (response)
+    // add event listener to dbRef that will listen for every time there is a change in the database
     dbRef.on('value', (response) => {
-      // console.log(response.val());
-
-      // variable called data to store the response from Firebase; .val() method gets the data object
       const myData = response.val();
-      // new State variable that will store the response as a State
       const newArray = [];
 
-      // using for in loop to itirate through the object and get each goal
       for (let propertyName in myData) {
         const goalObject = {
           key: propertyName,
           title: myData[propertyName]
         }
-        // push the goal into the newArray
         newArray.push(goalObject);
       }
-      // call setGoals in order to update State using the newArray
       setGoals(newArray);
     })
-
   }, [] );
   // END useEFFECT
 
@@ -56,14 +47,13 @@ function App() {
   }
 
   return (
-    <div className="App" 
-    // style={{ backgroundImage: "url(/kyle-bushnell-TyGB-4Qwnw4-unsplash.jpg)"}}
-    >
+    <div className="App">
       <header>
         <h1>get your sh!t together, set some goals!</h1>
       </header> 
 
       <main className="wrapper">
+        {/* START OF FORM SECTION */}
         <section className="formSection">
           <form action="submit" onSubmit={handleSubmit}>
             <label htmlFor="userGoal">What do you want to accomplish?</label>
@@ -133,12 +123,12 @@ export default App;
       // - reset the state to be empty
 // add the unique key data (add object, with the key & title(goal) data, to useEffect's for in loop)
 
+// STRETCH GOALS: 
 // 3. Allow a user to remove a goal they complete
     // add remove button next to each goal
     // create remove goal function that will use each unique key to tell firebase which goal to remove
     // add click event to each button that will call the remove goal function
 
-// STRETCH GOALS: 
 // 4. make an API call to unsplash photos and pull a motivational background image
 // set the image as a background-image
 

@@ -12,7 +12,6 @@
 }
 
 /* HEADER STYLING START */
-
 h1 {
   font-size: 2.5em;
   text-transform: uppercase;
@@ -80,7 +79,7 @@ img {
   border: 2px solid white;
 }
 
-/* contents of goalsDiv include: */
+/* contents of goalsDiv */
 ul {
   display: flex;
   flex-wrap: wrap;
@@ -116,7 +115,7 @@ footer {
 }
 
 
-
+/* MEDIA QUERIES START*/
 @media (max-width:750px) {
   h1 {
     font-size: 1.8em;

@@ -15,8 +15,9 @@ const DisplayPhoto = (props) => {
                 count: 1
             }
         }).then((response) => {
-            console.log(response.data);
             setAllPhotos(response.data);
+        }).catch(error => {
+            return error;
         })
 
     }, []);

@@ -3,12 +3,12 @@ import 'firebase/database';
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCEPkoK_WMPorOK2lejJDSr5BUdJUMaXV4",
-    authDomain: "beth-whalen-project3.firebaseapp.com",
-    projectId: "beth-whalen-project3",
-    storageBucket: "beth-whalen-project3.appspot.com",
-    messagingSenderId: "216468529199",
-    appId: "1:216468529199:web:d61a0e9fc84b7fe9d3e6da"
+    apiKey: "AIzaSyA9JmLc-R8Xz_6oilAfU-I1a_b8e5m4iZ8",
+    authDomain: "goal-setting-app-bbeca.firebaseapp.com",
+    projectId: "goal-setting-app-bbeca",
+    storageBucket: "goal-setting-app-bbeca.appspot.com",
+    messagingSenderId: "1089040817952",
+    appId: "1:1089040817952:web:d10157ee1094fee7008145"
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
